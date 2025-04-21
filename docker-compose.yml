@@ -1,0 +1,43 @@
+services:
+  app1:
+    build:
+      context: ./Advanced-ATS-Resume-Checker
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./Advanced-ATS-Resume-Checker/.env
+    environment:
+      - FLASK_APP=app1.py  # Runs app.py
+    depends_on:
+      - app2
+      - app3
+
+  app2:
+    build:
+      context: ./Advanced-ATS-Resume-Checker
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./Advanced-ATS-Resume-Checker/.env
+    environment:
+      - FLASK_APP=app2.py  # Runs app1.py
+
+  app3:
+    build:
+      context: ./Advanced-ATS-Resume-Checker
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./Advanced-ATS-Resume-Checker/.env
+    environment:
+      - FLASK_APP=app3.py  # Runs app2.py
+
+  frontend:
+    build:
+      context: ./React_FrontEnd
+    ports:
+      - "3000:3000"
+    depends_on:
+      - app1
+      - app2
+      - app3
