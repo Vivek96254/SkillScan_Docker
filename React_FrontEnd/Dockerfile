@@ -2,19 +2,19 @@
 FROM node:18-alpine 
 
 # Set the working directory
-WORKDIR /my-app 
+WORKDIR /app 
 
 # Copy package.json and package-lock.json first (for caching dependencies)
-COPY my-app/package*.json ./ 
+COPY package*.json ./ 
 
 # Install dependencies
 RUN npm install --legacy-peer-deps 
 
 # Copy the entire project into the container
-COPY my-app/ . 
+COPY . . 
 
 # Build the React project
 RUN npm run build 
 
 # Serve the build folder using a lightweight HTTP server
-CMD ["npx", "serve", "-s", "build", "-l", "3000"]
+CMD ["npm", "run", "dev"]

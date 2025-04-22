@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 5000
 
 # Use environment variables to decide which app to run
-CMD ["sh", "-c", "python ${FLASK_APP}"]
+CMD ["python", "app.py"]
