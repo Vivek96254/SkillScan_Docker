@@ -21,7 +21,7 @@ export default function InterviewQuestions() {
     setAnswers({})
 
     try {
-      const response = await fetch("http://localhost:5000/get-interview-questions", {
+      const response = await fetch("https://skillscan-docker.onrender.com/get-interview-questions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

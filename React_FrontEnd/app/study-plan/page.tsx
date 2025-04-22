@@ -22,7 +22,7 @@ export default function StudyPlan() {
     setStudyPlan("");
 
     try {
-      const response = await fetch("http://localhost:5000/generate-study-plan", {
+      const response = await fetch("https://skillscan-docker.onrender.com/generate-study-plan", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

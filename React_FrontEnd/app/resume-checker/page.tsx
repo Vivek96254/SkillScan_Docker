@@ -53,7 +53,7 @@ export default function ResumeChecker() {
     formData.append("analysis_type", analysisType)
   
     try {
-      const res = await fetch("http://localhost:5000/analyze", {
+      const res = await fetch("https://skillscan-docker.onrender.com/analyze", {
         method: "POST",
         body: formData,
       })
