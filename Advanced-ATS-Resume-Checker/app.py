@@ -71,7 +71,7 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             2. Identify the most suitable profession for this resume.
             3. List 3 key strengths of the resume.
             4. Suggest 2 quick improvements.
-            5. Give an overall ATS score out of 100 based on the job description. Title for this point in this format(Overall ATS Score (out of 100): score)
+            5. Give an overall ATS score out of 100 based on the job description and keep the score precise and flexible. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
             Job description (if provided): {job_description}
@@ -83,7 +83,7 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             1. Identify the most suitable profession for this resume.
             2. List 3 key strengths of the resume.
             3. Suggest 2 quick improvements.
-            4. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
+            4. Give an overall ATS score out of 100 based on the job description and keep the score precise and flexible. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
             Job description (if provided): {job_description}
@@ -99,7 +99,7 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             4. Suggest 3-5 areas for improvement with specific recommendations.
             5. Rate the following aspects out of 10: Impact, Brevity, Style, Structure, Skills.
             6. Provide a brief review of each major section (e.g., Summary, Experience, Education).
-            7. Give an overall ATS score out of 100 based on the job description. Title for this point in this format(Overall ATS Score (out of 100): score)
+            7. Give an overall ATS score out of 100 based on the job description and keep the score precise and flexible. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
             Job description (if provided): {job_description}
@@ -113,7 +113,7 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             3. Suggest 3-5 areas for improvement with specific recommendations.
             4. Rate the following aspects out of 10: Impact, Brevity, Style, Structure, Skills.
             5. Provide a brief review of each major section (e.g., Summary, Experience, Education).
-            6. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
+            6. Give an overall ATS score out of 100 based on the job description and keep the score precise and flexible. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
             Job description (if provided): {job_description}
@@ -128,7 +128,7 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             3. Suggest reformatting or restructuring to improve ATS readability.
             4. Recommend changes to improve keyword density without keyword stuffing.
             5. Provide 3-5 bullet points on how to tailor this resume for the specific job description.
-            6. Give an overall ATS score out of 100 based on the job description. Title for this point in this format(Overall ATS Score (out of 100): score)
+            6. Give an overall ATS score out of 100 based on the job description and keep the score precise and flexible. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
             Job description: {job_description}
@@ -141,7 +141,7 @@ def get_gemini_output(resume_text, job_description, analysis_type):
             2. Suggest reformatting or restructuring to improve ATS readability.
             3. Recommend changes to improve keyword density without keyword stuffing.
             4. Provide 3-5 bullet points on how to tailor this resume for the suitable job description.
-            5. Give an overall ATS score out of 100. Title for this point in this format(Overall ATS Score (out of 100): score)
+            5. Give an overall ATS score out of 100 based on the job description and keep the score precise and flexible. Title for this point in this format(Overall ATS Score (out of 100): score)
             
             Resume text: {resume_text}
             Job description: {job_description}
