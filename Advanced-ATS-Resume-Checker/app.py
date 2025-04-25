@@ -59,7 +59,7 @@ def extract_text_from_docx(docx_path):
     return text
 
 def get_gemini_output(resume_text, job_description, analysis_type):
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.0-flash")
     
     if analysis_type == "Quick Scan":
         if job_description:
@@ -235,7 +235,7 @@ def generate_study_plan_with_gemini(role, weeks):
     """
 
     try:
-        model = genai.GenerativeModel("gemini-1.5-flash") 
+        model = genai.GenerativeModel("gemini-2.0-flash") 
         response = model.generate_content(prompt)
         return response.text if hasattr(response, 'text') else str(response)
     except Exception as e:
