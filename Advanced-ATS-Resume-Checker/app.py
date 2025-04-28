@@ -11,7 +11,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 # from google.generativeai import configure, GenerativeModel
 
-#Test push
+
 # --- Setup ---
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
