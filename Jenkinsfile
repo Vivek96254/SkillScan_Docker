@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS_ID = 'docker-creds'  // Jenkins credentials ID for Docker Hub
-        DOCKERHUB_USERNAME = 'vivek96254'  // Your Docker Hub username
+        DOCKERHUB_USERNAME = 'vivek96254'           // Your Docker Hub username
         COMPOSE_FILE = 'docker-compose.yml'
-        IMAGE_NAME_BACKEND = 'vivek96254/skillscan_docker-app'  // Docker Hub repository name for backend
+        IMAGE_NAME_BACKEND = 'vivek96254/skillscan_docker-app'    // Docker Hub repository name for backend
         IMAGE_NAME_FRONTEND = 'vivek96254/skillscan_docker-frontend'  // Docker Hub repository name for frontend
     }
 
@@ -16,14 +16,14 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Checking out code...'
+                echo '🔄 Checking out code...'
                 checkout scm
             }
         }
 
         stage('Docker Compose Build') {
             steps {
-                echo 'Building Docker images using Compose...'
+                echo '🔨 Building Docker images using Compose...'
                 script {
                     if (isUnix()) {
                         sh "docker compose -f ${COMPOSE_FILE} build"
@@ -36,7 +36,7 @@ pipeline {
 
         stage('Tag Docker Images') {
             steps {
-                echo 'Tagging images for Docker Hub...'
+                echo '🏷️ Tagging images for Docker Hub...'
                 script {
                     if (isUnix()) {
                         sh """
@@ -55,18 +55,22 @@ pipeline {
 
         stage('Push Docker Images') {
             steps {
-                echo 'Pushing images to Docker Hub...'
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                echo '📤 Pushing images to Docker Hub...'
+                withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
-                        isUnix() ? sh '''
-                            echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
-                            docker push vivek96254/skillscan_docker-app:latest
-                            docker push vivek96254/skillscan_docker-frontend:latest
-                        ''' : bat '''
-                            echo %PASSWORD% | docker login -u %USERNAME% --password-stdin
-                            docker push vivek96254/skillscan_docker-app:latest
-                            docker push vivek96254/skillscan_docker-frontend:latest
-                        '''
+                        if (isUnix()) {
+                            sh '''
+                                echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
+                                docker push vivek96254/skillscan_docker-app:latest
+                                docker push vivek96254/skillscan_docker-frontend:latest
+                            '''
+                        } else {
+                            bat '''
+                                echo %PASSWORD% | docker login -u %USERNAME% --password-stdin
+                                docker push vivek96254/skillscan_docker-app:latest
+                                docker push vivek96254/skillscan_docker-frontend:latest
+                            '''
+                        }
                     }
                 }
             }
