@@ -66,7 +66,7 @@ pipeline {
                             """
                         } else {
                             bat """
-                                echo $PASSWORD | docker login -u $USERNAME --password-stdin
+                                docker login
                                 docker push ${IMAGE_NAME_BACKEND}:latest
                                 docker push ${IMAGE_NAME_FRONTEND}:latest
                             """
