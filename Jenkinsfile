@@ -56,21 +56,17 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 echo 'Pushing images to Docker Hub...'
-                withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                     script {
-                        if (isUnix()) {
-                            sh """
-                                echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
-                                docker push ${IMAGE_NAME_BACKEND}:latest
-                                docker push ${IMAGE_NAME_FRONTEND}:latest
-                            """
-                        } else {
-                            powershell """
-                                echo \$PASSWORD | docker login -u \$USERNAME --password-stdin
-                                docker push \$IMAGE_NAME_BACKEND:latest
-                                docker push \$IMAGE_NAME_FRONTEND:latest
-                            """
-                        }
+                        isUnix() ? sh '''
+                            echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
+                            docker push vivek96254/skillscan_docker-app:latest
+                            docker push vivek96254/skillscan_docker-frontend:latest
+                        ''' : bat '''
+                            echo %PASSWORD% | docker login -u %USERNAME% --password-stdin
+                            docker push vivek96254/skillscan_docker-app:latest
+                            docker push vivek96254/skillscan_docker-frontend:latest
+                        '''
                     }
                 }
             }
