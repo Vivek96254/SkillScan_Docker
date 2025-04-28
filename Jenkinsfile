@@ -80,9 +80,43 @@ pipeline {
     post {
         success {
             echo '✅ Build and push succeeded!'
-        }
-        failure {
-            echo '❌ Build or push failed!'
+            emailext (
+                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    Hello Vivek,
+
+                    The build completed successfully! 🎉
+
+                    Job: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    Build URL: ${env.BUILD_URL}
+
+                    Regards,
+                    Jenkins
+                    """,
+                                    to: 'vivekvinay96254@gmail.com'
+                                )
+                            }
+                            failure {
+                                echo '❌ Build or push failed!'
+                                emailext (
+                                    subject: "❌ FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                                    body: """
+                    Hello Vivek,
+
+                    The build or push failed. 😞
+
+                    Job: ${env.JOB_NAME}
+                    Build Number: ${env.BUILD_NUMBER}
+                    Build URL: ${env.BUILD_URL}
+
+                    Please check the console output for more details.
+
+                    Regards,
+                    Jenkins
+                    """,
+                to: 'vivekvinay96254@gmail.com'
+            )
         }
     }
 }
