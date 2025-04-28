@@ -65,10 +65,10 @@ pipeline {
                                 docker push ${IMAGE_NAME_FRONTEND}:latest
                             """
                         } else {
-                            bat """
-                                docker login
-                                docker push ${IMAGE_NAME_BACKEND}:latest
-                                docker push ${IMAGE_NAME_FRONTEND}:latest
+                            powershell """
+                                echo \$PASSWORD | docker login -u \$USERNAME --password-stdin
+                                docker push \$IMAGE_NAME_BACKEND:latest
+                                docker push \$IMAGE_NAME_FRONTEND:latest
                             """
                         }
                     }
