@@ -24,12 +24,12 @@ pipeline {
         stage('Docker Compose Build') {
             steps {
                 echo 'Building Docker images using Compose...'
-                // For Unix-based systems (using 'sh')
-                if (isUnix()) {
-                    sh "docker compose -f ${COMPOSE_FILE} build"
-                } else {
-                    // For Windows-based systems (using 'bat' for CMD)
-                    bat "docker compose -f ${COMPOSE_FILE} build"
+                script {
+                    if (isUnix()) {
+                        sh "docker compose -f ${COMPOSE_FILE} build"
+                    } else {
+                        bat "docker compose -f ${COMPOSE_FILE} build"
+                    }
                 }
             }
         }
@@ -37,18 +37,18 @@ pipeline {
         stage('Tag Docker Images') {
             steps {
                 echo 'Tagging images for Docker Hub...'
-                // For Unix-based systems (using 'sh')
-                if (isUnix()) {
-                    sh """
-                        docker tag skillscan_docker-app:latest ${IMAGE_NAME_BACKEND}:latest
-                        docker tag skillscan_docker-frontend:latest ${IMAGE_NAME_FRONTEND}:latest
-                    """
-                } else {
-                    // For Windows-based systems (using 'bat' for CMD)
-                    bat """
-                        docker tag skillscan_docker-app:latest ${IMAGE_NAME_BACKEND}:latest
-                        docker tag skillscan_docker-frontend:latest ${IMAGE_NAME_FRONTEND}:latest
-                    """
+                script {
+                    if (isUnix()) {
+                        sh """
+                            docker tag skillscan_docker-app:latest ${IMAGE_NAME_BACKEND}:latest
+                            docker tag skillscan_docker-frontend:latest ${IMAGE_NAME_FRONTEND}:latest
+                        """
+                    } else {
+                        bat """
+                            docker tag skillscan_docker-app:latest ${IMAGE_NAME_BACKEND}:latest
+                            docker tag skillscan_docker-frontend:latest ${IMAGE_NAME_FRONTEND}:latest
+                        """
+                    }
                 }
             }
         }
@@ -57,20 +57,20 @@ pipeline {
             steps {
                 echo 'Pushing images to Docker Hub...'
                 withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    // For Unix-based systems (using 'sh')
-                    if (isUnix()) {
-                        sh """
-                            echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
-                            docker push ${IMAGE_NAME_BACKEND}:latest
-                            docker push ${IMAGE_NAME_FRONTEND}:latest
-                        """
-                    } else {
-                        // For Windows-based systems (using 'bat' for CMD)
-                        bat """
-                            echo $PASSWORD | docker login -u $USERNAME --password-stdin
-                            docker push ${IMAGE_NAME_BACKEND}:latest
-                            docker push ${IMAGE_NAME_FRONTEND}:latest
-                        """
+                    script {
+                        if (isUnix()) {
+                            sh """
+                                echo "$PASSWORD" | docker login -u "$USERNAME" --password-stdin
+                                docker push ${IMAGE_NAME_BACKEND}:latest
+                                docker push ${IMAGE_NAME_FRONTEND}:latest
+                            """
+                        } else {
+                            bat """
+                                echo $PASSWORD | docker login -u $USERNAME --password-stdin
+                                docker push ${IMAGE_NAME_BACKEND}:latest
+                                docker push ${IMAGE_NAME_FRONTEND}:latest
+                            """
+                        }
                     }
                 }
             }
