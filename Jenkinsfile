@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CREDENTIALS_ID = 'docker-creds'  // Jenkins credentials ID for Docker Hub
-        DOCKERHUB_USERNAME = 'vivek96254'           // Your Docker Hub username
+        DOCKERHUB_USERNAME = 'vivek96254'           
         COMPOSE_FILE = 'docker-compose.yml'
         IMAGE_NAME_BACKEND = 'vivek96254/skillscan_docker-app'    
         IMAGE_NAME_FRONTEND = 'vivek96254/skillscan_docker-frontend'  
