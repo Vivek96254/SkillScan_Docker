@@ -6,7 +6,7 @@ pipeline {
         DOCKERHUB_USERNAME = 'vivek96254'           // Your Docker Hub username
         COMPOSE_FILE = 'docker-compose.yml'
         IMAGE_NAME_BACKEND = 'vivek96254/skillscan_docker-app'    // Docker Hub repository name for backend
-        IMAGE_NAME_FRONTEND = 'vivek96254/skillscan_docker-frontend'  // Docker Hub repository name for frontend
+        IMAGE_NAME_FRONTEND = 'vivek96254/skillscan_docker-frontend'  
     }
 
     triggers {
