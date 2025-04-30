@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS_ID = 'docker-creds'  
+        DOCKERHUB_CREDENTIALS_ID = 'docker-creds'
         DOCKERHUB_USERNAME = 'vivek96254'           
         COMPOSE_FILE = 'docker-compose.yml'
         IMAGE_NAME_BACKEND = 'vivek96254/skillscan_docker-app'    
