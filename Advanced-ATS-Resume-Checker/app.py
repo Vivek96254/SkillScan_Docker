@@ -3,7 +3,7 @@ import logging
 import tempfile
 import requests
 from bs4 import BeautifulSoup
-import fitz  # PyMuPDF
+import fitz  
 import docx
 import google.generativeai as genai
 from flask import Flask, request, jsonify
